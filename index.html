@@ -8,7 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%231E3A5F'/%3E%3Cstop offset='1' stop-color='%23142136'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M14 46 L14 20 L20 20 L32 36 L44 20 L50 20 L50 46 L44 46 L44 30 L33.5 44 L30.5 44 L20 30 L20 46 Z' fill='%23D2A858'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Sora:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 :root{
@@ -17,12 +17,12 @@
   --navy:#1E3A5F;--steel:#3E5C84;--gold:#B07C2E;--gold-2:#D2A858;
   --line:rgba(26,34,51,0.10);--line-2:rgba(26,34,51,0.18);
   --glass:rgba(26,34,51,0.04);
-  --display:"Fraunces",Georgia,serif;--sans:"Sora",-apple-system,BlinkMacSystemFont,sans-serif;--mono:"JetBrains Mono",monospace;
+  --display:"Plus Jakarta Sans","Inter",-apple-system,BlinkMacSystemFont,sans-serif;--sans:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;--mono:"JetBrains Mono",monospace;
   --grad:linear-gradient(120deg,var(--navy),var(--steel));
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.6;overflow-x:hidden;min-height:100vh}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.6;overflow-x:hidden;min-height:100vh;letter-spacing:-0.011em}
 ::selection{background:var(--navy);color:#fff}
 #bg-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .wrap{position:relative;z-index:3}
@@ -34,7 +34,7 @@ nav.scrolled{border-bottom-color:var(--line);background:rgba(247,245,240,0.92)}
 nav .brand{display:flex;align-items:center;gap:11px;cursor:pointer}
 nav .brand .mark{width:34px;height:34px;border-radius:9px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 6px 16px -6px rgba(30,58,95,.5)}
 nav .brand .mark svg{width:20px;height:20px;display:block}
-nav .brand .name{font-family:var(--display);font-weight:500;font-size:19px}
+nav .brand .name{font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-.02em}
 nav .brand .name em{font-style:italic;color:var(--gold)}
 nav .links{display:flex;gap:2px;list-style:none}
 nav .links a{color:var(--slate);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.02em;position:relative;cursor:pointer;padding:8px 14px;border-radius:100px;transition:color .3s,background .3s}
@@ -51,7 +51,7 @@ nav .links a.active::after{content:"";position:absolute;left:50%;transform:trans
 .phead{margin-bottom:5.5vh}
 .section-label{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--slate);margin-bottom:16px;display:flex;align-items:center;gap:14px}
 .section-label::before{content:"";width:40px;height:1px;background:var(--gold)}
-.section-title{font-family:var(--display);font-weight:340;font-size:clamp(36px,6vw,78px);line-height:1;letter-spacing:-.02em;max-width:18ch;color:var(--ink)}
+.section-title{font-family:var(--display);font-weight:800;font-size:clamp(36px,6vw,78px);line-height:.95;letter-spacing:-.025em;max-width:18ch;color:var(--ink)}
 .section-title em{font-style:italic;color:var(--gold)}
 .section-intro{max-width:62ch;font-size:clamp(15px,1.7vw,18px);color:var(--ink-2);font-weight:300;margin-top:22px}
 .reveal{opacity:0;transform:translateY(36px);transition:opacity .8s cubic-bezier(.2,.8,.2,1),transform .8s cubic-bezier(.2,.8,.2,1)}
@@ -62,13 +62,13 @@ nav .links a.active::after{content:"";position:absolute;left:50%;transform:trans
 .hero{min-height:calc(100vh - 84px);display:flex;flex-direction:column;justify-content:center;padding:4vh 6vw 5vh;position:relative;max-width:1340px;margin:0 auto}
 .hero .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.38em;text-transform:uppercase;color:var(--slate);margin-bottom:30px;display:flex;gap:14px;align-items:center;opacity:0;animation:rise 1s .2s forwards cubic-bezier(.2,.8,.2,1)}
 .hero .eyebrow::before{content:"";width:46px;height:1px;background:var(--gold)}
-.hero h1{font-family:var(--display);font-weight:330;font-size:clamp(46px,9.5vw,140px);line-height:.92;letter-spacing:-.025em;margin-bottom:26px;color:var(--ink)}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,9.5vw,140px);line-height:.9;letter-spacing:-.03em;margin-bottom:26px;color:var(--ink)}
 .hero h1 .l1{display:block;overflow:hidden}
 .hero h1 .l1 span{display:inline-block;transform:translateY(110%);animation:slideUp 1.05s .35s forwards cubic-bezier(.16,1,.3,1)}
 .hero h1 .l2{display:block;overflow:hidden}
-.hero h1 .l2 span{display:inline-block;transform:translateY(110%);font-style:italic;font-weight:400;color:var(--gold);animation:slideUp 1.05s .5s forwards cubic-bezier(.16,1,.3,1);padding-right:.08em}
+.hero h1 .l2 span{display:inline-block;transform:translateY(110%);font-style:italic;font-weight:700;color:var(--gold);animation:slideUp 1.05s .5s forwards cubic-bezier(.16,1,.3,1);padding-right:.08em}
 @keyframes slideUp{to{transform:translateY(0)}}
-.hero .summary{font-family:var(--display);font-weight:330;font-size:clamp(19px,2.4vw,28px);line-height:1.45;max-width:30ch;color:var(--ink-2);margin-top:6px}
+.hero .summary{font-family:var(--display);font-weight:500;font-size:clamp(19px,2.4vw,28px);line-height:1.4;max-width:30ch;color:var(--ink-2);margin-top:6px}
 .hero .summary .w{display:inline-block;opacity:0;transform:translateY(12px)}
 .hero .summary .accent{font-style:italic;color:var(--gold)}
 .hero .cta-row{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;opacity:0;transform:translateY(18px);animation:rise 1s 1.7s forwards cubic-bezier(.2,.8,.2,1)}
@@ -98,7 +98,7 @@ nav .links a.active::after{content:"";position:absolute;left:50%;transform:trans
 .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:56px;align-items:start}
 .about-body p{font-size:clamp(15.5px,1.8vw,19px);color:var(--ink-2);font-weight:300;margin-bottom:22px;line-height:1.7}
 .about-body p b{color:var(--ink);font-weight:600}
-.about-body .lead{font-family:var(--display);font-weight:340;font-size:clamp(21px,2.6vw,28px);line-height:1.42;color:var(--ink);margin-bottom:30px}
+.about-body .lead{font-family:var(--display);font-weight:700;font-size:clamp(21px,2.6vw,28px);line-height:1.35;color:var(--ink);margin-bottom:30px}
 .about-side{position:sticky;top:110px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:8px 26px;box-shadow:0 24px 50px -36px rgba(26,34,51,.3)}
 .fact{padding:18px 0;border-bottom:1px solid var(--line)}
 .fact:last-child{border-bottom:none}
@@ -116,7 +116,7 @@ nav .links a.active::after{content:"";position:absolute;left:50%;transform:trans
 .xp-logo img{width:70%;height:70%;object-fit:contain}
 .xp-logo .fallback{font-family:var(--display);font-weight:500;font-size:19px;color:var(--navy)}
 .xp-title .meta{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--gold);text-transform:uppercase;margin-bottom:4px}
-.xp-title h3{font-family:var(--display);font-weight:400;font-size:clamp(19px,2.4vw,26px);line-height:1.12;color:var(--ink)}
+.xp-title h3{font-family:var(--display);font-weight:600;font-size:clamp(19px,2.4vw,26px);line-height:1.12;color:var(--ink)}
 .xp-title .org{font-size:13.5px;color:var(--slate);margin-top:3px;font-weight:400}
 .xp-title .org .badge{display:inline-block;margin-left:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;padding:3px 9px;border-radius:100px;border:1px solid var(--line-2);color:var(--navy);vertical-align:middle;background:var(--bg)}
 .xp-toggle{width:36px;height:36px;border-radius:50%;border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;color:var(--navy);transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s;flex-shrink:0;font-size:16px}
@@ -142,7 +142,7 @@ nav .links a.active::after{content:"";position:absolute;left:50%;transform:trans
 .proj .bar{position:absolute;top:0;left:0;width:100%;height:4px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
 .proj:hover .bar{transform:scaleX(1)}
 .proj .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate)}
-.proj h3{font-family:var(--display);font-weight:400;font-size:clamp(24px,2.9vw,32px);line-height:1.06;margin:18px 0 12px;color:var(--ink)}
+.proj h3{font-family:var(--display);font-weight:700;font-size:clamp(22px,2.9vw,32px);line-height:1.06;margin:18px 0 12px;color:var(--ink)}
 .proj p{font-size:14.5px;color:var(--ink-2);font-weight:300;max-width:48ch}
 .proj .stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
 .proj .stack span{font-family:var(--mono);font-size:10.5px;padding:5px 11px;border-radius:100px;background:var(--bg2);color:var(--ink-2)}
@@ -166,7 +166,7 @@ nav .links a.active::after{content:"";position:absolute;left:50%;transform:trans
 .bar-row:nth-child(even) .bar-fill{background:linear-gradient(120deg,var(--gold),var(--gold-2))}
 .demo-card{grid-column:1 / -1;border-radius:20px;padding:34px 32px;background:var(--card);border:1px solid var(--line)}
 .demo-card .demo-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:22px}
-.demo-card h4{font-family:var(--display);font-weight:400;font-size:24px;color:var(--ink)}
+.demo-card h4{font-family:var(--display);font-weight:700;font-size:24px;color:var(--ink)}
 .demo-card h4 em{font-style:italic;color:var(--gold)}
 .demo-card .demo-sub{font-size:13.5px;color:var(--slate);margin-top:5px;max-width:54ch}
 .demo-tabs{display:flex;gap:8px;flex-wrap:wrap}
@@ -189,7 +189,7 @@ nav .links a.active::after{content:"";position:absolute;left:50%;transform:trans
 
 /* ============ CONTACT ============ */
 .contact-inner{text-align:center;display:flex;flex-direction:column;align-items:center;min-height:62vh;justify-content:center}
-.contact-inner .big{font-family:var(--display);font-weight:340;font-size:clamp(40px,8vw,104px);line-height:.98;letter-spacing:-.02em;margin:22px 0;color:var(--ink)}
+.contact-inner .big{font-family:var(--display);font-weight:800;font-size:clamp(40px,8vw,104px);line-height:.95;letter-spacing:-.025em;margin:22px 0;color:var(--ink)}
 .contact-inner .big em{font-style:italic;color:var(--gold)}
 .contact-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:38px}
 .clink{display:flex;flex-direction:column;align-items:center;gap:10px;text-decoration:none;padding:22px 26px;border-radius:18px;border:1px solid var(--line);background:var(--card);transition:all .35s cubic-bezier(.2,.8,.2,1);min-width:108px}
@@ -211,7 +211,7 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--
 .modal-close{position:absolute;top:18px;right:18px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line-2);background:var(--card);color:var(--ink);font-size:17px;cursor:pointer;transition:all .3s;z-index:2}
 .modal-close:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 .modal .m-eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.modal h3{font-family:var(--display);font-weight:400;font-size:clamp(24px,3.4vw,32px);line-height:1.1;margin-bottom:6px;color:var(--ink)}
+.modal h3{font-family:var(--display);font-weight:700;font-size:clamp(22px,3.4vw,30px);line-height:1.1;margin-bottom:6px;color:var(--ink)}
 .modal .m-org{font-size:14px;color:var(--slate);margin-bottom:20px}
 .modal p{font-size:14.5px;color:var(--ink-2);margin-bottom:16px}
 .modal ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
@@ -227,21 +227,51 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--
 #lightbox .modal-close{background:#fff}
 
 /* ============ INVESTMENT MODAL ============ */
-.pie-wrap{display:grid;grid-template-columns:240px 1fr;gap:30px;align-items:start;margin-top:8px}
-.pie-svg{width:100%;max-width:240px;aspect-ratio:1;display:block;margin:0 auto}
-.pie-svg path{transition:opacity .25s,transform .25s;transform-origin:center;cursor:pointer}
-.pie-svg path:hover{opacity:.82}
-.holdings{display:flex;flex-direction:column;max-height:46vh;overflow-y:auto;border:1px solid var(--line);border-radius:14px}
-.hrow{display:grid;grid-template-columns:14px 1fr 56px 84px;gap:12px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);font-size:13px}
+.modal.wide{max-width:800px}
+.pie-wrap{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:center;margin-top:14px}
+/* The stage is the square container that holds the SVG + the overlay center panel */
+.pie-stage{position:relative;width:100%;max-width:300px;margin:0 auto}
+.pie-svg{width:100%;aspect-ratio:1;display:block;overflow:visible}
+/* Each slice is a <g> wrapping the path; the whole group translates on hover */
+.pie-svg .slice{cursor:pointer}
+.pie-svg .slice path{transition:opacity .32s cubic-bezier(.2,.8,.2,1)}
+.pie-svg .slice{transition:transform .32s cubic-bezier(.2,.8,.2,1);transform-origin:50px 50px}
+.pie-svg.has-hot .slice{opacity:.18}
+.pie-svg.has-hot .slice.hot{opacity:1}
+/* Center info panel: absolutely positioned over the SVG hole */
+.pie-center{
+  position:absolute;
+  /* the SVG hole has radius 32 in a 100×100 viewBox, rendered at 300px → hole = 192px wide */
+  /* we inset by (300 - 192)/2 = 54px on each side */
+  inset:18% ;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;pointer-events:none;overflow:hidden
+}
+.pie-center .pc-logo{width:38px;height:38px;border-radius:9px;object-fit:contain;background:#fff;padding:3px;border:1px solid var(--line);margin-bottom:5px;box-shadow:0 4px 12px -6px rgba(26,34,51,.35);flex-shrink:0}
+.pie-center .pc-fb{width:38px;height:38px;border-radius:9px;margin-bottom:5px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:11px;flex-shrink:0}
+.pie-center .pc-name{font-size:10px;font-weight:600;color:var(--ink);line-height:1.25;max-width:100px}
+.pie-center .pc-w{font-family:var(--display);font-size:22px;font-weight:500;color:var(--navy);line-height:1.1;margin-top:2px}
+.pie-center .pc-sub{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-top:3px}
+/* Holdings legend */
+.holdings{display:flex;flex-direction:column;max-height:56vh;overflow-y:auto;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.hrow{display:grid;grid-template-columns:34px 1fr 46px;gap:10px;align-items:center;padding:7px 13px;border-bottom:1px solid var(--line);font-size:13px;cursor:pointer;transition:background .22s}
+.hrow:hover,.hrow.hot{background:var(--bg2)}
 .hrow:last-child{border-bottom:none}
-.hrow.hh{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);background:var(--bg);position:sticky;top:0}
-.hrow .sw{width:12px;height:12px;border-radius:4px}
-.hrow .tk{font-weight:500;color:var(--ink)}
-.hrow .tk small{display:block;font-weight:300;color:var(--slate);font-size:11px}
-.hrow .al{font-family:var(--mono);color:var(--ink-2);text-align:right}
-.hrow .px{font-family:var(--mono);text-align:right;color:var(--slate)}
-.hrow .px.up{color:#1E7A4D}.hrow .px.dn{color:#B0432E}
-.px-note{font-size:11.5px;color:var(--mist);margin-top:12px;font-family:var(--mono)}
+.hrow .hlogo{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#fff;border:1px solid var(--line);flex-shrink:0}
+.hrow .hlogo img{width:75%;height:75%;object-fit:contain;display:block}
+.hrow .hfb{font-size:9px;font-weight:700;color:#fff;width:100%;height:100%;border-radius:9px;display:flex;align-items:center;justify-content:center}
+.hrow .htk{font-weight:500;color:var(--ink);line-height:1.2;font-size:12.5px}
+.hrow .htk small{display:block;font-weight:300;color:var(--slate);font-size:11px}
+.hrow .hal{font-family:var(--mono);color:var(--navy);text-align:right;font-weight:500;font-size:12px}
+/* Trading 212 copy-pie banner */
+.t212{margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:18px 22px;border-radius:16px;background:linear-gradient(120deg,rgba(30,58,95,.06),rgba(0,160,0,.05));border:1px solid var(--line)}
+.t212 .t212-txt .t212-k{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--slate);margin-bottom:4px}
+.t212 .t212-txt .t212-v{font-family:var(--display);font-size:18px;font-weight:500;color:var(--ink);line-height:1.15}
+.t212 .t212-txt .t212-v small{display:block;font-family:var(--sans);font-size:12px;font-weight:300;color:var(--slate);margin-top:3px}
+.t212-btn{font-family:var(--sans);font-size:13.5px;font-weight:600;letter-spacing:-.01em;padding:13px 24px;border-radius:100px;border:none;cursor:pointer;color:#fff;background:linear-gradient(120deg,#1E3A5F,#16633A);display:inline-flex;align-items:center;gap:9px;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s,filter .3s;box-shadow:0 12px 26px -12px rgba(22,99,58,.55);white-space:nowrap}
+.t212-btn:hover{transform:translateY(-2px);box-shadow:0 18px 34px -12px rgba(22,99,58,.6);filter:brightness(1.06)}
+.t212-btn svg{width:16px;height:16px;fill:currentColor}
+.t212-btn.done{background:linear-gradient(120deg,#16633A,#1E7A4D)}
 
 @media(max-width:880px){
   nav .links{position:fixed;top:0;right:-100%;width:78%;height:100vh;flex-direction:column;justify-content:center;gap:12px;background:rgba(251,250,247,0.98);backdrop-filter:blur(24px);padding:0 8vw;transition:right .5s cubic-bezier(.2,.8,.2,1);box-shadow:-30px 0 60px -30px rgba(0,0,0,.2)}
@@ -256,7 +286,7 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--
   .xp-head{grid-template-columns:48px 1fr auto;gap:14px;padding:18px 18px}
   .xp-logo{width:48px;height:48px;border-radius:11px}
   .xp-body-inner{padding:2px 18px 22px 18px}
-  .pie-wrap{grid-template-columns:1fr}
+  .pie-wrap{grid-template-columns:1fr;max-width:340px;margin:0 auto}
   .modal{padding:30px 24px}
 }
 @media(prefers-reduced-motion:reduce){
@@ -556,32 +586,34 @@ const AWARDS=[
    detail:`<p>Covered the core Power BI workflow end to end:</p><ul><li>Data import, cleaning and modelling</li><li>DAX measures and calculated columns</li><li>Dashboard design and publishing to Power BI Service</li></ul>`,cert:"assets/powerbi-cert.jpg"}
 ];
 
-/* ---- INVESTMENT PORTFOLIO ----
-   EDIT ME: set your real holdings and target weights (must total 100).
-   "fh" is the Finnhub symbol for live prices, leave "" for non-US listings.
-   To enable live prices: register free at finnhub.io, paste your key below. */
-const FINNHUB_KEY="";  /* <-- paste your free Finnhub API key here */
+/* ---- INVESTMENT PORTFOLIO: real Trading 212 grey target weights ---- */
 const HOLDINGS=[
-  {tk:"ISWD",name:"iShares MSCI World Islamic ETF",w:20,fh:""},
-  {tk:"SGLN",name:"Physical Gold ETC",w:17,fh:""},
-  {tk:"MSFT",name:"Microsoft",w:6,fh:"MSFT"},
-  {tk:"JNJ",name:"Johnson & Johnson",w:6,fh:"JNJ"},
-  {tk:"NVDA",name:"NVIDIA",w:5,fh:"NVDA"},
-  {tk:"NVO",name:"Novo Nordisk",w:5,fh:"NVO"},
-  {tk:"CVX",name:"Chevron",w:5,fh:"CVX"},
-  {tk:"GOOGL",name:"Alphabet",w:4,fh:"GOOGL"},
-  {tk:"ASML",name:"ASML",w:4,fh:"ASML"},
-  {tk:"AVGO",name:"Broadcom",w:4,fh:"AVGO"},
-  {tk:"AAPL",name:"Apple",w:3,fh:"AAPL"},
-  {tk:"AMD",name:"AMD",w:3,fh:"AMD"},
-  {tk:"CRWD",name:"CrowdStrike",w:3,fh:"CRWD"},
-  {tk:"FSLR",name:"First Solar",w:3,fh:"FSLR"},
-  {tk:"SAP",name:"SAP SE",w:3,fh:"SAP"},
-  {tk:"PG",name:"Procter & Gamble",w:3,fh:"PG"},
-  {tk:"LLY",name:"Eli Lilly",w:3,fh:"LLY"},
-  {tk:"CASH",name:"Cash buffer",w:3,fh:""}
+  {tk:"SGLN",  name:"iShares Physical Gold",       w:20, c:"#C9A227", d:"ishares.com"},
+  {tk:"ISWD",  name:"iShares MSCI World Islamic",  w:16, c:"#00855D", d:"ishares.com"},
+  {tk:"ISDE",  name:"iShares MSCI EM Islamic",     w:8,  c:"#3FAE6A", d:"ishares.com"},
+  {tk:"MSFT",  name:"Microsoft",                   w:5,  c:"#00A4EF", d:"microsoft.com"},
+  {tk:"JNJ",   name:"Johnson & Johnson",           w:5,  c:"#D51900", d:"jnj.com"},
+  {tk:"NVO",   name:"Novo Nordisk",                w:4,  c:"#001965", d:"novonordisk.com"},
+  {tk:"LLY",   name:"Eli Lilly & Co",              w:4,  c:"#E1261C", d:"lilly.com"},
+  {tk:"GOOGL", name:"Alphabet",                    w:4,  c:"#4285F4", d:"google.com"},
+  {tk:"AAPL",  name:"Apple",                       w:4,  c:"#555555", d:"apple.com"},
+  {tk:"ISRG",  name:"Intuitive Surgical",          w:3,  c:"#20366B", d:"intuitive.com"},
+  {tk:"NVDA",  name:"Nvidia",                      w:3,  c:"#76B900", d:"nvidia.com"},
+  {tk:"AVGO",  name:"Broadcom",                    w:3,  c:"#CC092F", d:"broadcom.com"},
+  {tk:"ASML",  name:"ASML",                        w:3,  c:"#0F238C", d:"asml.com"},
+  {tk:"CRWD",  name:"Crowdstrike",                 w:3,  c:"#E8403C", d:"crowdstrike.com"},
+  {tk:"ANET",  name:"Arista Networks",             w:2,  c:"#2B5DAD", d:"arista.com"},
+  {tk:"NOW",   name:"ServiceNow",                  w:2,  c:"#52B737", d:"servicenow.com"},
+  {tk:"SAP",   name:"SAP",                         w:2,  c:"#008FD3", d:"sap.com"},
+  {tk:"CVX",   name:"Chevron",                     w:1,  c:"#0066B2", d:"chevron.com"},
+  {tk:"PANW",  name:"Palo Alto Networks",          w:1,  c:"#FA582D", d:"paloaltonetworks.com"},
+  {tk:"BYD",   name:"BYD",                         w:1,  c:"#D40000", d:"byd.com"},
+  {tk:"META",  name:"Meta Platforms",              w:1,  c:"#0866FF", d:"meta.com"},
+  {tk:"FSLR",  name:"First Solar",                 w:1,  c:"#E8A500", d:"firstsolar.com"},
+  {tk:"TM",    name:"Toyota Motor",                w:1,  c:"#EB0A1E", d:"toyota.com"},
+  {tk:"AMZN",  name:"Amazon",                      w:1,  c:"#FF9900", d:"amazon.com"},
+  {tk:"AMD",   name:"Advanced Micro Devices",      w:1,  c:"#008C44", d:"amd.com"}
 ];
-const PIE_COLORS=["#1E3A5F","#D2A858","#3E5C84","#B07C2E","#5B7AA6","#8A6B33","#27496D","#C99A4B","#46688F","#9C7A3C","#34557C","#E0B86E","#1A2F4D","#7A6233","#6B89AE","#A98B4F","#22406A","#C2BBA9"];
 
 /* =========================================================
    BUILDERS
@@ -656,50 +688,122 @@ document.addEventListener("click",e=>{
 /* =========================================================
    INVESTMENT PORTFOLIO MODAL
    ========================================================= */
+function logoInner(h,imgCls,fbCls){
+  /* Tries clearbit logo; on error renders a coloured fallback tile */
+  return `<img class="${imgCls}" src="https://logo.clearbit.com/${h.d}" alt="${h.name}" loading="lazy"
+    onerror="this.outerHTML='<span class=&quot;${fbCls}&quot; style=&quot;background:${h.c}&quot;>${h.tk}</span>'">`;
+}
+
 function buildPie(){
   const total=HOLDINGS.reduce((s,h)=>s+h.w,0);
-  let angle=-90,paths="";
+  /* Outer ring radius, inner hole radius (SVG units out of 100) */
+  const OR=46, IR=28; /* hole diameter = 56% of circle → big enough for content */
+  let angle=-90, groups="";
   HOLDINGS.forEach((h,i)=>{
     const sweep=h.w/total*360;
-    const a0=angle*Math.PI/180,a1=(angle+sweep)*Math.PI/180;
-    const large=sweep>180?1:0;
-    const x0=50+42*Math.cos(a0),y0=50+42*Math.sin(a0);
-    const x1=50+42*Math.cos(a1),y1=50+42*Math.sin(a1);
-    paths+=`<path d="M50 50 L${x0.toFixed(2)} ${y0.toFixed(2)} A42 42 0 ${large} 1 ${x1.toFixed(2)} ${y1.toFixed(2)} Z" fill="${PIE_COLORS[i%PIE_COLORS.length]}"><title>${h.name} · ${h.w}%</title></path>`;
+    const mid=(angle+sweep/2)*Math.PI/180;
+    const a0=angle*Math.PI/180, a1=(angle+sweep)*Math.PI/180;
+    const lg=sweep>180?1:0;
+    /* outer arc */
+    const ox0=(50+OR*Math.cos(a0)).toFixed(2), oy0=(50+OR*Math.sin(a0)).toFixed(2);
+    const ox1=(50+OR*Math.cos(a1)).toFixed(2), oy1=(50+OR*Math.sin(a1)).toFixed(2);
+    /* inner arc (reversed for the closing cut-out) */
+    const ix0=(50+IR*Math.cos(a1)).toFixed(2), iy0=(50+IR*Math.sin(a1)).toFixed(2);
+    const ix1=(50+IR*Math.cos(a0)).toFixed(2), iy1=(50+IR*Math.sin(a0)).toFixed(2);
+    /* pop-out offset along the midpoint normal */
+    const POP=3.8;
+    const tx=(POP*Math.cos(mid)).toFixed(3), ty=(POP*Math.sin(mid)).toFixed(3);
+    /* donut path: outer arc → line to inner → inner arc back → close */
+    const d=`M${ox0} ${oy0} A${OR} ${OR} 0 ${lg} 1 ${ox1} ${oy1} L${ix0} ${iy0} A${IR} ${IR} 0 ${lg} 0 ${ix1} ${iy1} Z`;
+    groups+=`<g class="slice" data-i="${i}" data-tx="${tx}" data-ty="${ty}" style="transform-origin:50px 50px">
+      <path d="${d}" fill="${h.c}"/></g>`;
     angle+=sweep;
   });
-  return `<svg class="pie-svg" viewBox="0 0 100 100">${paths}<circle cx="50" cy="50" r="20" fill="var(--card)"/><text x="50" y="48" text-anchor="middle" font-size="7" font-weight="600" fill="#1A2233" font-family="Sora">Live</text><text x="50" y="56" text-anchor="middle" font-size="5.4" fill="#67708A" font-family="Sora">5 yrs · weekly DCA</text></svg>`;
+  return `<svg class="pie-svg" id="pieSvg" viewBox="0 0 100 100">${groups}</svg>`;
 }
+
+function pieCenterHTML(h){
+  if(!h) return `<div class="pc-name" style="font-size:11px;color:var(--slate)">Hover a slice</div>`;
+  return `${logoInner(h,"pc-logo","pc-fb")}
+    <div class="pc-name">${h.name}</div>
+    <div class="pc-w">${h.w}%</div>
+    <div class="pc-sub">${h.tk} · target</div>`;
+}
+
+function pieActivate(i){
+  const svg=document.getElementById("pieSvg");if(!svg)return;
+  svg.classList.add("has-hot");
+  svg.querySelectorAll(".slice").forEach(g=>{
+    const hot=+g.dataset.i===i;
+    g.classList.toggle("hot",hot);
+    g.style.transform=hot?`translate(${g.dataset.tx}px,${g.dataset.ty}px)`:"";
+  });
+  document.querySelectorAll("#holdList .hrow").forEach(r=>r.classList.toggle("hot",+r.dataset.i===i));
+  document.getElementById("pieCenter").innerHTML=pieCenterHTML(HOLDINGS[i]);
+}
+function pieReset(){
+  const svg=document.getElementById("pieSvg");if(!svg)return;
+  svg.classList.remove("has-hot");
+  svg.querySelectorAll(".slice").forEach(g=>{g.classList.remove("hot");g.style.transform="";});
+  document.querySelectorAll("#holdList .hrow").forEach(r=>r.classList.remove("hot"));
+  document.getElementById("pieCenter").innerHTML=pieCenterHTML(null);
+}
+
 document.getElementById("openPortfolio").addEventListener("click",()=>{
+  document.getElementById("modalBox").classList.add("wide");
   modalContent.innerHTML=`
-    <div class="m-eyebrow">Live portfolio</div>
+    <div class="m-eyebrow">Investment portfolio</div>
     <h3>Allocation by target weight</h3>
-    <div class="m-org">Self-directed · rules-based screening · automated weekly contributions</div>
+    <div class="m-org">Self-directed · rules-based screening · automated weekly contributions · 5 years</div>
     <div class="pie-wrap">
-      ${buildPie()}
-      <div>
-        <div class="holdings" id="holdRows">
-          <div class="hrow hh"><span></span><span>Holding</span><span style="text-align:right">Target</span><span style="text-align:right">Price</span></div>
-          ${HOLDINGS.map((h,i)=>`<div class="hrow"><span class="sw" style="background:${PIE_COLORS[i%PIE_COLORS.length]}"></span><span class="tk">${h.tk}<small>${h.name}</small></span><span class="al">${h.w}%</span><span class="px" id="px-${h.tk}">–</span></div>`).join("")}
-        </div>
-        <div class="px-note" id="pxNote">Allocation weights shown. Live prices load for US-listed holdings.</div>
+      <div class="pie-stage">
+        ${buildPie()}
+        <div class="pie-center" id="pieCenter">${pieCenterHTML(null)}</div>
       </div>
+      <div class="holdings" id="holdList">
+        ${HOLDINGS.map((h,i)=>`
+          <div class="hrow" data-i="${i}">
+            <span class="hlogo">${logoInner(h,"","hfb")}</span>
+            <span class="htk">${h.name}<small>${h.tk}</small></span>
+            <span class="hal">${h.w}%</span>
+          </div>`).join("")}
+      </div>
+    </div>
+    <div class="t212">
+      <div class="t212-txt">
+        <div class="t212-k">Powered by Trading 212</div>
+        <div class="t212-v">Copy this exact pie<small>Replicate the full allocation in your own account, free.</small></div>
+      </div>
+      <button class="t212-btn" id="copyPie">
+        <svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
+        Copy this pie
+      </button>
     </div>`;
+
+  const svg=document.getElementById("pieSvg");
+  svg.addEventListener("mouseover",e=>{const g=e.target.closest(".slice[data-i]");if(g)pieActivate(+g.dataset.i);});
+  svg.addEventListener("mouseleave",pieReset);
+  svg.addEventListener("click",e=>{const g=e.target.closest(".slice[data-i]");if(g)pieActivate(+g.dataset.i);});
+  document.querySelectorAll("#holdList .hrow").forEach(r=>{
+    r.addEventListener("mouseenter",()=>pieActivate(+r.dataset.i));
+    r.addEventListener("mouseleave",pieReset);
+    r.addEventListener("click",()=>pieActivate(+r.dataset.i));
+  });
+  /* Copy-pie: open the live pie link AND copy it to clipboard */
+  const PIE_URL="https://www.trading212.com/pies/luabDJYlYs5TllYulmb9vdutvYmmr";
+  document.getElementById("copyPie").addEventListener("click",()=>{
+    window.open(PIE_URL,"_blank","noopener");
+    const btn=document.getElementById("copyPie");
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(PIE_URL).then(()=>{
+        btn.classList.add("done");
+        btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>Opened &amp; link copied';
+        setTimeout(()=>{btn.classList.remove("done");btn.innerHTML='<svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>Copy this pie';},2400);
+      }).catch(()=>{});
+    }
+  });
   openOverlay(modalOverlay);
-  loadPrices();
 });
-async function loadPrices(){
-  if(!FINNHUB_KEY){const n=document.getElementById("pxNote");if(n)n.textContent="Target allocation shown. Live price feed is configured separately.";return;}
-  const live=HOLDINGS.filter(h=>h.fh);
-  for(const h of live){
-    try{
-      const r=await fetch(`https://finnhub.io/api/v1/quote?symbol=${h.fh}&token=${FINNHUB_KEY}`);
-      const d=await r.json();
-      const el=document.getElementById("px-"+h.tk);
-      if(el&&d.c){const chg=d.dp||0;el.textContent=`$${d.c.toFixed(2)} ${chg>=0?"▲":"▼"}${Math.abs(chg).toFixed(1)}%`;el.classList.add(chg>=0?"up":"dn");}
-    }catch(err){/* leave dash */}
-  }
-}
 
 /* =========================================================
    SKILLS: bar animation + live demo chart
@@ -733,7 +837,7 @@ function drawDemo(progress){
     grad.addColorStop(0,i%2?"#D2A858":"#3E5C84");grad.addColorStop(1,i%2?"#B07C2E":"#1E3A5F");
     ctx.fillStyle=grad;
     ctx.beginPath();ctx.roundRect(x,y,bw,h,[7,7,0,0]);ctx.fill();
-    ctx.fillStyle="#1A2233";ctx.font="600 12px Sora";ctx.textAlign="center";
+    ctx.fillStyle="#1A2233";ctx.font="600 12px Inter";ctx.textAlign="center";
     if(progress>0.95)ctx.fillText(v+(d.unit==="%"?"%":""),x+bw/2,y-8);
     ctx.fillStyle="#67708A";ctx.font="11px 'JetBrains Mono'";
     ctx.fillText(d.cats[i],x+bw/2,H-10);
@@ -868,14 +972,24 @@ function showTab(tab){
   }
   history.replaceState(null,"","#"+tab);
 }
-document.querySelectorAll("[data-tab]").forEach(el=>{el.addEventListener("click",e=>{e.preventDefault();showTab(el.dataset.tab);navLinks.classList.remove("open");menuBtn.textContent="☰";});});
+document.querySelectorAll("[data-tab]").forEach(el=>{el.addEventListener("click",e=>{e.preventDefault();showTab(el.dataset.tab);if(typeof closeMenu==="function")closeMenu();});});
 
 /* NAV */
 const nav=document.getElementById("nav");
 window.addEventListener("scroll",()=>{nav.classList.toggle("scrolled",window.scrollY>30);});
 const menuBtn=document.getElementById("menuBtn");
 const navLinks=document.getElementById("navLinks");
-menuBtn.addEventListener("click",()=>{navLinks.classList.toggle("open");menuBtn.textContent=navLinks.classList.contains("open")?"✕":"☰";});
+function closeMenu(){navLinks.classList.remove("open");menuBtn.textContent="☰";}
+function openMenu(){navLinks.classList.add("open");menuBtn.textContent="✕";}
+menuBtn.addEventListener("click",(e)=>{e.stopPropagation();navLinks.classList.contains("open")?closeMenu():openMenu();});
+/* Tap anywhere outside the open menu closes it */
+document.addEventListener("click",(e)=>{
+  if(!navLinks.classList.contains("open"))return;
+  if(navLinks.contains(e.target)||menuBtn.contains(e.target))return;
+  closeMenu();
+});
+/* ESC closes the menu too */
+document.addEventListener("keydown",(e)=>{if(e.key==="Escape")closeMenu();});
 
 /* CARD TILT */
 function bindTilt(){
