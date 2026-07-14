@@ -34,10 +34,12 @@ nav.scrolled{border-bottom-color:var(--line);background:rgba(247,245,240,0.92)}
 nav .brand{display:flex;align-items:center;gap:11px;cursor:pointer}
 nav .brand .mark{width:34px;height:34px;border-radius:9px;background:var(--grad);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 6px 16px -6px rgba(30,58,95,.5)}
 nav .brand .mark svg{width:20px;height:20px;display:block}
-nav .brand .name{font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-.02em}
+nav .brand .name{font-family:var(--display);font-weight:700;font-size:17px;letter-spacing:-.02em;white-space:nowrap}
 nav .brand .name em{font-style:italic;color:var(--gold)}
+nav .brand .name .ext{display:inline-block;max-width:0;overflow:hidden;vertical-align:bottom;white-space:nowrap;opacity:0;transition:max-width .55s cubic-bezier(.34,1.2,.4,1),opacity .4s .05s}
+nav .brand:hover .name .ext{max-width:260px;opacity:1}
 nav .links{display:flex;gap:2px;list-style:none}
-nav .links a{color:var(--slate);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.02em;position:relative;cursor:pointer;padding:8px 14px;border-radius:100px;transition:color .3s,background .3s}
+nav .links a{color:var(--slate);text-decoration:none;font-size:12.5px;font-weight:500;letter-spacing:.01em;position:relative;cursor:pointer;padding:8px 12px;border-radius:100px;transition:color .3s,background .3s}
 nav .links a:hover{color:var(--ink);background:var(--glass)}
 nav .links a.active{color:var(--ink)}
 nav .links a.active::after{content:"";position:absolute;left:50%;transform:translateX(-50%);bottom:0;width:18px;height:2px;border-radius:2px;background:var(--gold)}
@@ -122,7 +124,7 @@ nav .links a.active::after{content:"";position:absolute;left:50%;transform:trans
 .xp-toggle{width:36px;height:36px;border-radius:50%;border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;color:var(--navy);transition:transform .4s cubic-bezier(.2,.8,.2,1),background .3s;flex-shrink:0;font-size:16px}
 .xp.open .xp-toggle{transform:rotate(45deg);background:var(--navy);color:#fff;border-color:var(--navy)}
 .xp-body{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.2,.8,.2,1)}
-.xp.open .xp-body{max-height:700px}
+.xp.open .xp-body{max-height:1000px}
 .xp-body-inner{padding:2px 26px 26px 110px}
 .xp-points{list-style:none;display:flex;flex-direction:column;gap:10px;max-width:68ch}
 .xp-points li{position:relative;padding-left:20px;font-size:14.5px;color:var(--ink-2);font-weight:300}
@@ -134,6 +136,38 @@ nav .links a.active::after{content:"";position:absolute;left:50%;transform:trans
 .xp-proof .thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .xp-proof-label{width:100%;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--slate);margin-bottom:-2px}
 .xp-hint{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist);text-align:right;margin-top:10px}
+/* --- Experience card motion --- */
+.xp{position:relative}
+.xp::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--navy),var(--gold));transform:scaleY(0);transform-origin:top;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.xp.open::before,.xp:hover::before{transform:scaleY(1)}
+.xp-logo{transition:transform .45s cubic-bezier(.34,1.4,.5,1)}
+.xp:hover .xp-logo{transform:translateY(-3px) scale(1.05)}
+.xp.open .xp-logo{transform:scale(1.05)}
+/* Stat counters revealed on expand */
+.xp-stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.xp-stat{flex:1;min-width:130px;border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:linear-gradient(120deg,rgba(30,58,95,.04),rgba(176,124,46,.05));opacity:0;transform:translateY(10px)}
+.xp.open .xp-stat{animation:statIn .5s forwards cubic-bezier(.2,.8,.2,1)}
+.xp.open .xp-stat:nth-child(2){animation-delay:.09s}
+@keyframes statIn{to{opacity:1;transform:translateY(0)}}
+.xs-n{font-family:var(--display);font-weight:700;font-size:26px;line-height:1;color:var(--navy);letter-spacing:-.02em}
+.xs-l{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-top:5px}
+/* Bullets cascade in */
+.xp-points li{opacity:0;transform:translateX(-8px)}
+.xp.open .xp-points li{animation:pointIn .45s forwards cubic-bezier(.2,.8,.2,1);animation-delay:calc(.16s + var(--pi) * .07s)}
+@keyframes pointIn{to{opacity:1;transform:translateX(0)}}
+.xp-points li::before{transition:transform .3s}
+.xp-points li:hover::before{transform:scale(1.7)}
+@media(prefers-reduced-motion:reduce){
+  .xp-stat,.xp-points li{opacity:1!important;transform:none!important;animation:none!important}
+}
+/* ============ VOLUNTEERING ============ */
+.vol-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:36px;align-items:start}
+.vol-side{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:6px 26px 10px;position:sticky;top:110px;box-shadow:0 24px 50px -36px rgba(26,34,51,.3)}
+.vol-side-head{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);padding:20px 0 4px;border-bottom:1px solid var(--line)}
+.vol-fact{padding:16px 0;border-bottom:1px solid var(--line)}
+.vol-fact:last-child{border-bottom:none}
+.vol-fact .vf-k{font-family:var(--sans);font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.vol-fact .vf-v{font-size:13px;color:var(--ink-2);font-weight:300;line-height:1.55}
 
 /* ============ PROJECTS ============ */
 .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
@@ -151,29 +185,29 @@ nav .links a.active::after{content:"";position:absolute;left:50%;transform:trans
 .view-btn:hover{background:var(--steel);transform:translateY(-2px);box-shadow:0 12px 24px -12px rgba(30,58,95,.6)}
 .view-btn .arrow{font-size:14px}
 
-/* ============ SKILLS ============ */
-.skill-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.skill-card{border-radius:20px;padding:32px 30px;background:var(--card);border:1px solid var(--line);transition:transform .5s,box-shadow .5s}
-.skill-card:hover{transform:translateY(-5px);box-shadow:0 24px 48px -26px rgba(26,34,51,.35)}
-.skill-card h4{font-family:var(--sans);font-weight:600;font-size:16.5px;margin-bottom:6px;color:var(--ink)}
-.skill-card .sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);margin-bottom:24px}
-.bar-row{margin-bottom:18px}
-.bar-row:last-child{margin-bottom:0}
-.bar-row .lbl{display:flex;justify-content:space-between;font-size:13.5px;color:var(--ink-2);margin-bottom:7px;font-weight:400}
-.bar-row .lbl .pct{font-family:var(--mono);font-size:11.5px;color:var(--navy);font-weight:500}
-.bar-track{height:7px;border-radius:10px;background:var(--bg2);overflow:hidden}
-.bar-fill{height:100%;width:0;border-radius:10px;background:var(--grad);transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
-.bar-row:nth-child(even) .bar-fill{background:linear-gradient(120deg,var(--gold),var(--gold-2))}
-.demo-card{grid-column:1 / -1;border-radius:20px;padding:34px 32px;background:var(--card);border:1px solid var(--line)}
-.demo-card .demo-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;margin-bottom:22px}
-.demo-card h4{font-family:var(--display);font-weight:700;font-size:24px;color:var(--ink)}
-.demo-card h4 em{font-style:italic;color:var(--gold)}
-.demo-card .demo-sub{font-size:13.5px;color:var(--slate);margin-top:5px;max-width:54ch}
-.demo-tabs{display:flex;gap:8px;flex-wrap:wrap}
-.demo-tab{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;padding:9px 18px;border-radius:100px;border:1px solid var(--line-2);background:transparent;color:var(--ink-2);cursor:pointer;transition:all .3s}
-.demo-tab:hover{border-color:var(--navy);color:var(--navy)}
-.demo-tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-#demoChart{width:100%;height:260px;display:block}
+/* ============ SKILLS (evidence-based) ============ */
+.sk-legend{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:22px;padding:14px 20px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.sk-key{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate)}
+.lv{width:26px;height:7px;border-radius:10px;display:inline-block;flex-shrink:0;background:var(--bg2);position:relative;overflow:hidden}
+.lv::after{content:"";position:absolute;left:0;top:0;height:100%;border-radius:10px}
+.lv1::after{width:33%;background:var(--mist)}
+.lv2::after{width:66%;background:var(--gold)}
+.lv3::after{width:100%;background:var(--navy)}
+.sk-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sk-card{border-radius:20px;padding:28px 26px;background:var(--card);border:1px solid var(--line);transition:transform .5s,box-shadow .5s}
+.sk-card:hover{transform:translateY(-5px);box-shadow:0 24px 48px -26px rgba(26,34,51,.35)}
+.sk-head h4{font-family:var(--sans);font-weight:600;font-size:16.5px;color:var(--ink);padding-bottom:14px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+.sk-item{padding:14px 0;border-bottom:1px solid var(--line)}
+.sk-item:last-child{border-bottom:none;padding-bottom:0}
+.sk-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:6px}
+.sk-n{font-size:13.5px;font-weight:500;color:var(--ink)}
+.sk-mark{font-family:var(--mono);font-size:13px;font-weight:600;color:#fff;background:var(--navy);padding:3px 9px;border-radius:100px;flex-shrink:0}
+.sk-ev{font-size:12.5px;color:var(--ink-2);font-weight:300;line-height:1.55}
+.sk-ev b{font-weight:600;color:var(--navy)}
+.sk-proof{margin-top:22px;display:flex;justify-content:space-between;align-items:center;gap:26px;flex-wrap:wrap;padding:28px 30px;border-radius:20px;background:linear-gradient(120deg,rgba(30,58,95,.05),rgba(176,124,46,.06));border:1px solid var(--line)}
+.sk-proof-txt h4{font-family:var(--display);font-weight:700;font-size:21px;color:var(--ink);margin-bottom:6px;letter-spacing:-.02em}
+.sk-proof-txt p{font-size:13.5px;color:var(--ink-2);font-weight:300;max-width:58ch}
+.sk-proof-btns{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}
 
 /* ============ RECOGNITION ============ */
 .awards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
@@ -192,6 +226,21 @@ nav .links a.active::after{content:"";position:absolute;left:50%;transform:trans
 .contact-inner .big{font-family:var(--display);font-weight:800;font-size:clamp(40px,8vw,104px);line-height:.95;letter-spacing:-.025em;margin:22px 0;color:var(--ink)}
 .contact-inner .big em{font-style:italic;color:var(--gold)}
 .contact-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:38px}
+/* WhatsApp floating button */
+.wa-fab{position:fixed;right:22px;bottom:22px;z-index:150;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 30px -8px rgba(37,211,102,.6);transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s;text-decoration:none}
+.wa-fab svg{width:32px;height:32px;fill:#fff}
+.wa-fab:hover{transform:scale(1.08) translateY(-2px);box-shadow:0 18px 38px -8px rgba(37,211,102,.7)}
+.wa-fab::after{content:"Chat on WhatsApp";position:absolute;right:70px;top:50%;transform:translateY(-50%) translateX(6px);background:var(--ink);color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:8px 12px;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+.wa-fab:hover::after{opacity:1;transform:translateY(-50%) translateX(0)}
+@media(max-width:600px){.wa-fab{width:52px;height:52px;right:16px;bottom:16px}.wa-fab svg{width:28px;height:28px}.wa-fab::after{display:none}}
+/* Contact copy popup */
+.copy-row{display:flex;align-items:center;gap:12px;justify-content:space-between;border:1px solid var(--line-2);border-radius:12px;padding:14px 16px;margin:6px 0 16px;background:var(--bg)}
+.copy-row .cval{font-family:var(--mono);font-size:15px;color:var(--ink);word-break:break-all}
+.copy-btn{flex-shrink:0;font-family:var(--sans);font-size:12.5px;font-weight:600;padding:9px 16px;border-radius:100px;border:none;cursor:pointer;color:#fff;background:var(--navy);display:inline-flex;align-items:center;gap:7px;transition:background .3s,transform .3s}
+.copy-btn svg{width:14px;height:14px;fill:currentColor}
+.copy-btn:hover{background:var(--steel);transform:translateY(-1px)}
+.copy-btn.done{background:#1E7A4D}
+.copy-actions{display:flex;gap:10px;flex-wrap:wrap}
 .clink{display:flex;flex-direction:column;align-items:center;gap:10px;text-decoration:none;padding:22px 26px;border-radius:18px;border:1px solid var(--line);background:var(--card);transition:all .35s cubic-bezier(.2,.8,.2,1);min-width:108px}
 .clink:hover{border-color:var(--navy);transform:translateY(-5px);box-shadow:0 20px 40px -22px rgba(30,58,95,.5)}
 .clink .cico{width:44px;height:44px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;transition:background .35s}
@@ -280,8 +329,11 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--
   .menu-btn{display:block}
   .recruit .rc-grid{grid-template-columns:1fr 1fr}
   .recruit .rc{border-bottom:1px solid var(--line)}
-  .proj-grid,.skill-cols,.awards{grid-template-columns:1fr}
+  .proj-grid,.sk-cols,.awards{grid-template-columns:1fr}
+  .sk-proof{flex-direction:column;align-items:flex-start}
   .about-grid{grid-template-columns:1fr;gap:36px}
+  .vol-grid{grid-template-columns:1fr;gap:26px}
+  .vol-side{position:static}
   .about-side{position:static}
   .xp-head{grid-template-columns:48px 1fr auto;gap:14px;padding:18px 18px}
   .xp-logo{width:48px;height:48px;border-radius:11px}
@@ -303,13 +355,14 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--
 <nav id="nav">
   <div class="brand" data-tab="home">
     <div class="mark"><svg viewBox="0 0 64 64"><path d="M14 46 L14 20 L20 20 L32 36 L44 20 L50 20 L50 46 L44 46 L44 30 L33.5 44 L30.5 44 L20 30 L20 46 Z" fill="#D2A858"/></svg></div>
-    <div class="name">Md <em>Mehedi</em></div>
+    <div class="name">Md <span class="ext">Rahmath Ullah&nbsp;</span><em>Mehedi</em></div>
   </div>
   <button class="menu-btn" id="menuBtn">☰</button>
   <ul class="links" id="navLinks">
     <li><a data-tab="home" class="active">Home</a></li>
     <li><a data-tab="about">About</a></li>
     <li><a data-tab="work">Experience</a></li>
+    <li><a data-tab="volunteer">Volunteering</a></li>
     <li><a data-tab="projects">Projects</a></li>
     <li><a data-tab="skills">Skills</a></li>
     <li><a data-tab="awards">Recognition</a></li>
@@ -322,7 +375,7 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--
   <!-- ================= HOME ================= -->
   <div class="page active" id="page-home">
     <section class="hero">
-      <div class="eyebrow">Business · Data · Hospitality</div>
+      <div class="eyebrow">Commercial analysis · Data to decisions</div>
       <h1>
         <span class="l1"><span>Md Rahmath Ullah</span></span>
         <span class="l2"><span>Mehedi</span></span>
@@ -335,11 +388,11 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--
       <div class="recruit">
         <div class="rc-head"><span class="dot"></span><span>For recruiters · at a glance</span></div>
         <div class="rc-grid">
-          <div class="rc"><div class="k">Applying for</div><div class="v">Sales · Consulting · Administration<small>Also data &amp; business analysis</small></div></div>
-          <div class="rc"><div class="k">Right to work</div><div class="v">Yes, UK<small>No sponsorship needed until Sept 2028</small></div></div>
-          <div class="rc"><div class="k">Availability</div><div class="v">Immediate for interviews<small>Flexible start date</small></div></div>
-          <div class="rc"><div class="k">Location</div><div class="v">London<small>Open to relocating UK-wide</small></div></div>
-          <div class="rc"><div class="k">Extras</div><div class="v">Full UK driving licence<small>4 languages · DBS-checked roles</small></div></div>
+          <div class="rc"><div class="k">Career focus</div><div class="v">Commercial analysis<small>Sales · Consulting · Grad schemes</small></div></div>
+          <div class="rc"><div class="k">Proven in</div><div class="v">B2B sales &amp; operations<small>FMCG exports · hospitality groups</small></div></div>
+          <div class="rc"><div class="k">Availability</div><div class="v">One month notice period<small>Happy to arrange conversations around it</small></div></div>
+          <div class="rc"><div class="k">Right to work</div><div class="v">UK Graduate Route<small>No sponsorship needed</small></div></div>
+          <div class="rc"><div class="k">Extras</div><div class="v">Full UK driving licence<small>4 languages · Power BI · SQL · Excel</small></div></div>
         </div>
       </div>
     </section>
@@ -350,19 +403,19 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--
     <div class="container">
       <div class="phead">
         <div class="section-label reveal">About</div>
-        <h2 class="section-title reveal d1">A builder across <em>business, data &amp; care.</em></h2>
+        <h2 class="section-title reveal d1">A builder across <em>commercial, data &amp; operations.</em></h2>
       </div>
       <div class="about-grid">
         <div class="about-body">
           <p class="lead reveal d1">I am a final-year Business Management student who never learned to do just one thing at a time.</p>
-          <p class="reveal d2">Across the last three years I have held up to <b>five concurrent roles</b> spanning luxury hospitality, NHS administration, international B2B sales and live events, all while completing my degree at London South Bank University on Business Management with Placement.</p>
-          <p class="reveal d3">The common thread is a bias toward <b>building</b>. When I notice a process breaking, I do not wait for someone else to fix it. At Homerton Hospital I spotted that the team had no way to track requests against deadlines, so I built one in Excel. At Accor I noticed colleagues waiting on inbound leads, so I built a data-led prospecting approach that made me <b>Best Seller</b> in my cohort.</p>
+          <p class="reveal d2">Across the last three years I have held up to <b>five concurrent roles</b> spanning luxury hospitality, international B2B sales, live events and NHS patient support, all while completing my degree at London South Bank University on Business Management with Placement.</p>
+          <p class="reveal d3">The common thread is a bias toward <b>fixing what is broken</b>. When I notice a process failing, I do not wait for someone else to raise it. At Inventive I traced a recurring inventory discrepancy through stock analysis and proposed a revised procurement schedule, cutting estimated waste by around <b>40%</b>. At Accor I analysed recurring guest feedback patterns and proposed service recovery protocols that were adopted across the team.</p>
           <p class="reveal d4">I bring advanced data skills in <b>Power BI, Excel and SQL</b>, five years of self-directed investing, and a genuine obsession with getting the detail right, whether that detail is a reconciliation, a pitch, or a guest's experience.</p>
         </div>
         <aside class="about-side reveal d2">
           <div class="fact"><div class="k">Based in</div><div class="v">London, UK</div></div>
           <div class="fact"><div class="k">Open to</div><div class="v">Relocating anywhere in the UK</div></div>
-          <div class="fact"><div class="k">Focus</div><div class="v">Sales · Consulting · Administration · Data</div></div>
+          <div class="fact"><div class="k">Focus</div><div class="v">Commercial analysis: turning business questions into decisions</div></div>
           <div class="fact"><div class="k">Education</div><div class="v">BA (Hons) Business Management<br>+ CS Engineering foundation</div></div>
           <div class="fact"><div class="k">Languages</div><div class="langs"><span>English</span><span>Bengali</span><span>Hindi</span><span>Urdu</span></div></div>
         </aside>
@@ -379,6 +432,41 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--
         <p class="section-intro reveal d2">A working history built on doing several demanding things at once, and being trusted with accuracy, leadership and client relationships in every one. Tap any role to expand it.</p>
       </div>
       <div class="xp-list" id="xpList"></div>
+    </div>
+  </div>
+
+  <!-- ================= VOLUNTEERING ================= -->
+  <div class="page" id="page-volunteer">
+    <div class="container">
+      <div class="phead">
+        <div class="section-label reveal">01b · Volunteering</div>
+        <h2 class="section-title reveal d1">Trusted with <em>people, not just process.</em></h2>
+        <p class="section-intro reveal d2">Three roles given to me because colleagues and institutions decided I could be relied on: supporting NHS patients on the wards, representing my co-workers to senior leadership, and running committee operations at university.</p>
+      </div>
+      <div class="vol-grid">
+        <div class="vol-main">
+          <div class="xp-list" id="volList"></div>
+        </div>
+        <aside class="vol-side reveal d2">
+          <div class="vol-side-head">What this demonstrates</div>
+          <div class="vol-fact">
+            <div class="vf-k">Chosen, not applied for</div>
+            <div class="vf-v">Nominated by colleagues as Active Listening Team Rep, the person trusted to carry staff concerns to HR and the General Manager.</div>
+          </div>
+          <div class="vol-fact">
+            <div class="vf-k">Stakeholder communication</div>
+            <div class="vf-v">Acting as the liaison between frontline staff and senior leadership, and driving the Employee Engagement Survey action plan with management.</div>
+          </div>
+          <div class="vol-fact">
+            <div class="vf-k">Composure with people</div>
+            <div class="vf-v">Patient-facing NHS support across wards and outpatients, trained in Conflict Resolution, Infection Control, Equality &amp; Diversity and Health &amp; Safety.</div>
+          </div>
+          <div class="vol-fact">
+            <div class="vf-k">Reliability over years</div>
+            <div class="vf-v">Over a year at the NHS alongside full-time work and a degree, following two years running committee operations at university.</div>
+          </div>
+        </aside>
+      </div>
     </div>
   </div>
 
@@ -428,44 +516,62 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--
     <div class="container">
       <div class="phead">
         <div class="section-label reveal">03 · Capabilities</div>
-        <h2 class="section-title reveal d1">Don't take my word, <em>watch it work.</em></h2>
-        <p class="section-intro reveal d2">Measured where a real mark exists, demonstrated where it doesn't. The dashboard below is live, built the same way I build real reporting tools.</p>
+        <h2 class="section-title reveal d1">Every claim has <em>a receipt.</em></h2>
+        <p class="section-intro reveal d2">No self-assigned percentages. Each skill below states the level, where I actually used it, and the evidence you can check. Where a real mark exists, it is shown. Where it doesn't, the proof is the work.</p>
       </div>
-      <div class="skill-cols">
-        <div class="skill-card reveal">
-          <h4>Data &amp; Analytics</h4><div class="sub">Power BI · Excel · SQL</div>
-          <div class="bar-row"><div class="lbl"><span>Advanced Excel &amp; Power Query</span><span class="pct">95%</span></div><div class="bar-track"><div class="bar-fill" data-w="95"></div></div></div>
-          <div class="bar-row"><div class="lbl"><span>Power BI · DAX · Service</span><span class="pct">90%</span></div><div class="bar-track"><div class="bar-fill" data-w="90"></div></div></div>
-          <div class="bar-row"><div class="lbl"><span>Data modelling &amp; reporting</span><span class="pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
-          <div class="bar-row"><div class="lbl"><span>SQL querying</span><span class="pct">75%</span></div><div class="bar-track"><div class="bar-fill" data-w="75"></div></div></div>
+
+      <div class="sk-legend reveal d2">
+        <span class="sk-key"><i class="lv lv3"></i>Daily, unsupervised</span>
+        <span class="sk-key"><i class="lv lv2"></i>Regular, in a real role</span>
+        <span class="sk-key"><i class="lv lv1"></i>Working knowledge</span>
+      </div>
+
+      <div class="sk-cols">
+        <div class="sk-card reveal">
+          <div class="sk-head"><h4>Data &amp; Analytics</h4></div>
+          <div class="sk-item"><div class="sk-top"><span class="sk-n">Excel &amp; Power Query</span><span class="lv lv3"></span></div>
+            <div class="sk-ev"><b>Built:</b> Excel-based seating plans for sold-out live shows; standardised reporting templates at Inventive.</div></div>
+          <div class="sk-item"><div class="sk-top"><span class="sk-n">Power BI &amp; DAX</span><span class="lv lv2"></span></div>
+            <div class="sk-ev"><b>Certified:</b> Power BI Essential Training (2024). <b>Built:</b> a UK hospitality trends dashboard.</div></div>
+          <div class="sk-item"><div class="sk-top"><span class="sk-n">Reporting &amp; data modelling</span><span class="lv lv3"></span></div>
+            <div class="sk-ev"><b>Used daily:</b> occupancy, revenue and satisfaction reporting at Accor and Treehouse.</div></div>
+          <div class="sk-item"><div class="sk-top"><span class="sk-n">SQL</span><span class="lv lv1"></span></div>
+            <div class="sk-ev"><b>Foundation:</b> Computer Science Engineering study, databases and query logic.</div></div>
         </div>
-        <div class="skill-card reveal d1">
-          <h4>Business &amp; Commercial</h4><div class="sub">Sales · Negotiation · Strategy</div>
-          <div class="bar-row"><div class="lbl"><span>B2B sales &amp; account growth</span><span class="pct">88%</span></div><div class="bar-track"><div class="bar-fill" data-w="88"></div></div></div>
-          <div class="bar-row"><div class="lbl"><span>Negotiation &amp; influence <b style="font-weight:600">(graded)</b></span><span class="pct">86%</span></div><div class="bar-track"><div class="bar-fill" data-w="86"></div></div></div>
-          <div class="bar-row"><div class="lbl"><span>Stakeholder management</span><span class="pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
-          <div class="bar-row"><div class="lbl"><span>Forecasting &amp; pricing analysis</span><span class="pct">80%</span></div><div class="bar-track"><div class="bar-fill" data-w="80"></div></div></div>
+
+        <div class="sk-card reveal d1">
+          <div class="sk-head"><h4>Commercial</h4></div>
+          <div class="sk-item"><div class="sk-top"><span class="sk-n">Negotiation &amp; influence</span><span class="sk-mark">86%</span></div>
+            <div class="sk-ev"><b>Graded:</b> Distinction, LSBU module. This is the one number on this page that is externally marked.</div></div>
+          <div class="sk-item"><div class="sk-top"><span class="sk-n">B2B sales &amp; lead generation</span><span class="lv lv3"></span></div>
+            <div class="sk-ev"><b>Did it:</b> three years at IFE London for Betrimex, generating qualified leads with buyers across Europe, MEA.</div></div>
+          <div class="sk-item"><div class="sk-top"><span class="sk-n">Client &amp; stakeholder management</span><span class="lv lv3"></span></div>
+            <div class="sk-ev"><b>Did it:</b> product presentations to senior procurement decision-makers; daily reports to senior management.</div></div>
+          <div class="sk-item"><div class="sk-top"><span class="sk-n">Consulting method</span><span class="lv lv1"></span></div>
+            <div class="sk-ev"><b>Certified:</b> job simulations with BCG, Deloitte, Accenture and KPMG.</div></div>
         </div>
-        <div class="skill-card reveal d2">
-          <h4>Systems &amp; Operations</h4><div class="sub">Hospitality · NHS · Payments</div>
-          <div class="bar-row"><div class="lbl"><span>Opera PMS</span><span class="pct">92%</span></div><div class="bar-track"><div class="bar-fill" data-w="92"></div></div></div>
-          <div class="bar-row"><div class="lbl"><span>CRM &amp; Microsoft 365</span><span class="pct">88%</span></div><div class="bar-track"><div class="bar-fill" data-w="88"></div></div></div>
-          <div class="bar-row"><div class="lbl"><span>Adyen &amp; payment reconciliation</span><span class="pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
-          <div class="bar-row"><div class="lbl"><span>NHS ESR · IG &amp; UK GDPR</span><span class="pct">80%</span></div><div class="bar-track"><div class="bar-fill" data-w="80"></div></div></div>
+
+        <div class="sk-card reveal d2">
+          <div class="sk-head"><h4>Operations &amp; Systems</h4></div>
+          <div class="sk-item"><div class="sk-top"><span class="sk-n">Opera PMS</span><span class="lv lv3"></span></div>
+            <div class="sk-ev"><b>Used daily:</b> two years across Accor and Treehouse, high-volume reservations and billing.</div></div>
+          <div class="sk-item"><div class="sk-top"><span class="sk-n">Knowcross &amp; Resaweb</span><span class="lv lv2"></span></div>
+            <div class="sk-ev"><b>Used in role:</b> service request tracking during the Accor placement year.</div></div>
+          <div class="sk-item"><div class="sk-top"><span class="sk-n">Team leadership</span><span class="lv lv3"></span></div>
+            <div class="sk-ev"><b>Did it:</b> supervising 10 to 15 staff at Inventive; designed the onboarding training programme.</div></div>
+          <div class="sk-item"><div class="sk-top"><span class="sk-n">Compliance training</span><span class="lv lv2"></span></div>
+            <div class="sk-ev"><b>Trained:</b> NHS modules in Equality &amp; Diversity, Health &amp; Safety, Infection Control and Conflict Resolution.</div></div>
         </div>
-        <div class="demo-card reveal d2">
-          <div class="demo-head">
-            <div>
-              <h4>Live demo: <em>a working mini dashboard.</em></h4>
-              <div class="demo-sub">Switch the dataset and the chart re-renders with animation. No libraries, no frameworks, just the kind of clean reporting I build at work.</div>
-            </div>
-            <div class="demo-tabs">
-              <button class="demo-tab active" data-ds="0">Occupancy</button>
-              <button class="demo-tab" data-ds="1">Revenue mix</button>
-              <button class="demo-tab" data-ds="2">Lead sources</button>
-            </div>
-          </div>
-          <canvas id="demoChart"></canvas>
+      </div>
+
+      <div class="sk-proof reveal d2">
+        <div class="sk-proof-txt">
+          <h4>The strongest proof isn't a bar chart.</h4>
+          <p>It's the tools I actually shipped. Vault Lookup is a working search tool for hotel booking data, running entirely in your browser. The investment portfolio is five years of live, rules-based allocation. Both are open to inspect.</p>
+        </div>
+        <div class="sk-proof-btns">
+          <a class="view-btn" href="https://damehedi.github.io/VaultLookup/" target="_blank" rel="noopener">Open Vault Lookup ↗</a>
+          <a class="view-btn" data-tab="projects" style="background:transparent;color:var(--ink);border:1px solid var(--line-2)">See all projects →</a>
         </div>
       </div>
     </div>
@@ -489,15 +595,15 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--
       <div class="contact-inner">
         <div class="section-label reveal" style="justify-content:center">05 · Let's talk</div>
         <div class="big reveal d1">Let's build something <em>that lasts.</em></div>
-        <p class="section-intro reveal d2" style="margin-left:auto;margin-right:auto">Open to graduate and early-career roles across sales, consulting, administration and data. Based in London, open to relocating anywhere in the UK.</p>
+        <p class="section-intro reveal d2" style="margin-left:auto;margin-right:auto">Interested in sales, consulting and graduate scheme roles across FMCG, automotive and professional services. One month notice period. Based in London, open to relocating anywhere in the UK. UK Graduate Route visa, no sponsorship required.</p>
         <div class="contact-links reveal d3">
-          <a class="clink" href="mailto:mdrahmathullahmehedi@gmail.com" aria-label="Email">
+          <a class="clink" href="#" data-contact="email" aria-label="Email">
             <span class="cico"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.24-8 5.01-8-5.01V6.3l8 5 8-5v1.94z"/></svg></span>
             <span>Email</span>
           </a>
-          <a class="clink" href="tel:+447803519013" aria-label="Call">
+          <a class="clink" href="#" data-contact="phone" aria-label="Phone">
             <span class="cico"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z"/></svg></span>
-            <span>Call</span>
+            <span>Phone</span>
           </a>
           <a class="clink" href="https://www.linkedin.com/in/damehedi/" target="_blank" rel="noopener" aria-label="LinkedIn">
             <span class="cico"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></span>
@@ -524,6 +630,11 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--
 <!-- Image lightbox -->
 <div class="overlay" id="lightbox"><div class="modal"><button class="modal-close" data-close>✕</button><img class="lightbox-img" id="lightboxImg" src="" alt=""></div></div>
 
+<!-- WhatsApp floating button -->
+<a class="wa-fab" href="https://wa.me/447803519013?text=Hi%20Mehedi%2C%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.55 4.19 1.6 6.02L4 29l8.13-1.56a12 12 0 0 0 3.9.65h.01C22.68 28.09 28.08 22.69 28.08 16.05 28.08 8.4 22.68 3 16.04 3zm0 21.9h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.22-3.75.72.75-3.66-.24-.38a9.86 9.86 0 0 1-1.51-5.26c0-5.47 4.46-9.92 9.94-9.92 2.65 0 5.14 1.04 7.02 2.91a9.86 9.86 0 0 1 2.9 7.02c0 5.47-4.46 9.92-9.93 9.92zm5.45-7.42c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.87 1.21 3.07.15.2 2.09 3.2 5.07 4.48.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>
+</a>
+
 <script>
 /* =========================================================
    DATA: edit these arrays, the page builds itself from them
@@ -536,24 +647,38 @@ footer p{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--
    /assets folder in your repo, e.g. assets/employee-of-the-year-2024.jpg.
    Thumbnails hide themselves automatically until the file exists. */
 const EXPERIENCE=[
-  {meta:"May 2026 – Present",role:"Guest Services Agent",org:"Treehouse Hotel London",badge:"Lifestyle · Sustainability-led",logo:"treehousehotels.com",fallback:"TH",
-   points:["Manage <b>end-to-end front office operations</b> including check-in, check-out, room assignments and reservations on Opera PMS, maintaining accuracy across guest profiles, booking records and billing.","Reconcile daily financial transactions across cash, card and room-charge postings, producing <b>front office reports</b> for management review.","Handle multi-channel guest communication across phone, email and in person, processing amendments, special requests and complaints through to resolution.","Support <b>occupancy and revenue tracking</b>, contributing to daily reporting and data accuracy across source codes, rate plans and booking channels."],
+  {meta:"May 2026 – Present",role:"Guest Services Specialist",org:"Treehouse Hotels, London",badge:"",logo:"treehousehotels.com",fallback:"TH",
+   points:["Managing <b>end-to-end front office operations</b> on Opera PMS: check-in, check-out, room assignments, reservations and billing accuracy across guest profiles and booking records.","Reconcile daily cash, card and room-charge transactions, producing <b>front office reports</b> for management review.","Support <b>occupancy and revenue tracking</b>, contributing to daily reporting accuracy across source codes, rate plans and booking channels.","Resolve multi-channel guest communications by phone, email and in person, from booking amendments to complaints."],
+   stats:[{v:4,suf:"",lbl:"Channels handled"},{v:100,suf:"%",lbl:"Billing accuracy target"}],
    proof:[{src:"assets/treehouse-listening-team.jpg",label:"Listening Out Team nomination"}]},
-  {meta:"May 2025 – Present",role:"Administrative Coordinator (Volunteer)",org:"Homerton Healthcare NHS Foundation Trust",badge:"CQC Outstanding",logo:"homerton.nhs.uk",fallback:"NHS",
-   points:["<b>Identified an operational gap</b> and independently designed an Excel-based SLA tracker, adopted by the team to monitor requests against statutory deadlines and eliminate untracked items.","Manage confidential records to NHS information-governance and UK GDPR standards.","Completed all <b>16 modules</b> of Homerton's mandatory training programme on the ESR system within the first three months."],
-   proof:[{src:"assets/homerton-training.jpg",label:"ESR training record"}]},
-  {meta:"Feb 2024 · Feb 2025 · Feb 2026",role:"International Sales Executive",org:"Betrimex · IFE London, ExCeL",badge:"3 consecutive years",logo:"betrimex.com.vn",fallback:"BX",
-   points:["Represented the business at the <b>International Food &amp; Drink Event</b> for three consecutive years, building relationships with senior commercial buyers and distribution partners across Europe.","Managed lead capture, post-event reporting and pipeline hand-off, adapting positioning to diverse international audiences within compressed engagement windows."],
+  {meta:"Feb 2024 – Present",role:"International Sales Executive",org:"Betrimex Vietnam · IFE London",badge:"3 consecutive years",logo:"betrimex.com.vn",fallback:"BX",
+   points:["Represented Betrimex, a leading Vietnamese FMCG exporter specialising in coconut-based products, at <b>IFE London</b> (ExCeL) across three editions: Feb 2024, Feb 2025 and March 2026.","Generated qualified <b>B2B leads</b> with European importers, distributors and retail buyers across the show floor.","Delivered product presentations and built relationships with senior procurement decision-makers across Europe, the Middle East and Africa.","Supported post-event CRM data entry, lead qualification and pipeline reporting to Vietnam HQ.","Summer internship with the regional team (Jul 2024, Horsens): B2B lead generation, CRM pipeline records, forecasting analytics and internal sales decks for senior stakeholders."],
+   stats:[{v:3,suf:"×",lbl:"IFE London editions"},{v:3,suf:"",lbl:"Continents covered"}],
    proof:[{src:"assets/ife-2026.jpg",label:"IFE London 2026"}]},
-  {meta:"Jul 2025 – May 2026",role:"Client Relations Executive",org:"TRIBE London, Accor Group",badge:"Front Office",logo:"accor.com",fallback:"TR",
-   points:["Primary relationship owner for corporate and repeat clients at a premium property, processing high-volume transactions to a <b>100% accuracy target</b> on Opera PMS and Adyen.","Managed escalations and operational incidents with composure in a 24-hour environment."],
+  {meta:"Jan 2023 – Present",role:"Operations Supervisor",org:"Inventive Productions · Alcotraz, Avora, Hexmoor",badge:"",logo:"alcotraz.co.uk",fallback:"IP",
+   points:["Leading operational delivery at immersive hospitality venues, managing teams of <b>10 to 15</b> staff and coordinating multi-department logistics during sold-out live events.","Identified a recurring inventory discrepancy through stock analysis and proposed a revised procurement schedule, cutting estimated waste by around <b>40%</b>.","Designed staff training programmes that reduced onboarding time and improved cross-shift consistency.","Produced daily performance reports for senior management and introduced <b>standardised reporting templates</b>. Progressed from Support Staff and Host into the supervisor role."],
+   stats:[{v:40,suf:"%",lbl:"Est. waste reduction"},{v:15,pre:"10–15",lbl:"Staff supervised"}],
+   proof:[{src:"assets/employee-of-the-year-2024.jpg",label:"Employee of the Year 2024"}]},
+  {meta:"Aug 2024 – Jun 2026",role:"Guest Services & Data Operations",org:"Accor",badge:"12-month placement",logo:"accor.com",fallback:"AC",
+   points:["Completed a structured <b>12-month industrial placement</b> (Aug 2024 – Jul 2025) rotating through front-office operations, back-office data processing and guest experience analytics.","Operated Opera PMS, <b>Knowcross and Resaweb</b> to process high-volume reservations, track service requests and generate daily occupancy and satisfaction reports for management review.","Analysed recurring guest feedback patterns and proposed <b>service recovery protocols</b> later adopted across the team.","Coordinated cross-functional resolution of service failures with housekeeping, F&amp;B and maintenance. Earlier role as Food &amp; Beverage Assistant (Nov 2023 – Aug 2024)."],
+   stats:[{v:12,suf:" mo",lbl:"Industrial placement"},{v:3,suf:"",lbl:"Systems operated"}],
    proof:[]},
-  {meta:"Aug 2024 – Jul 2025",role:"Business Development Placement",org:"Accor Group",badge:"Best Seller Q4 2024",logo:"accor.com",fallback:"AC",
-   points:["<b>Ranked first in the regional placement cohort</b> for Q4 2024, building a structured approach to prospecting, account profiling and upsell conversion.","Analysed daily and monthly commercial data to surface pricing, segmentation and forecasting opportunities, presenting findings to management.","Maintained CRM and booking data to a high integrity standard, producing standardised reporting for the team."],
-   proof:[{src:"assets/best-seller-q4-2024.jpg",label:"Best Seller award"}]},
-  {meta:"Jan 2023 – Present",role:"Commercial Supervisor (Events)",org:"Inventive Production Ltd",badge:"Employee of the Year 2024",logo:"alcotraz.co.uk",fallback:"IP",
-   points:["<b>Named Employee of the Year 2024</b> for reliability, leadership and accuracy across high-pressure live-event operations.","Standardised data-capture and reconciliation across multiple sites, cutting close-out time and eliminating recurring discrepancies."],
-   proof:[{src:"assets/employee-of-the-year-2024.jpg",label:"Employee of the Year"}]}
+  {meta:"Sep 2022 – Nov 2023",role:"Front of House",org:"Mitchells & Butlers PLC",badge:"",logo:"mbplc.com",fallback:"MB",
+   points:["Front-of-house service in a high-volume hospitality environment.","Contributed to digital content creation and social media engagement alongside core service responsibilities."],
+   proof:[]}
+];
+
+/* ---- VOLUNTEERING: lives on its own tab ---- */
+const VOLUNTEERING=[
+  {meta:"Apr 2025 – Present",role:"Homerton Helper",org:"Homerton Healthcare NHS Foundation Trust",badge:"CQC Outstanding",logo:"homerton.nhs.uk",fallback:"NHS",
+   points:["Voluntary <b>patient support</b> across wards and outpatient departments, improving patient experience and supporting smooth patient flow.","Completed NHS modules in <b>Equality &amp; Diversity, Health &amp; Safety, Infection Control and Conflict Resolution</b>.","Sustained weekly commitment alongside full-time work and a final-year degree."],
+   proof:[{src:"assets/homerton-training.jpg",label:"NHS training record"}]},
+  {meta:"Jun 2026 – Present",role:"Active Listening Team Rep",org:"Treehouse Hotels",badge:"Nominated",logo:"treehousehotels.com",fallback:"TH",
+   points:["<b>Nominated as a trusted workplace representative</b> to support cross-departmental employee engagement and foster a positive, respectful culture aligned with the company's RISE values (Respect, Integrity, Sustainability, Excellence).","Act as a <b>liaison between colleagues and senior leadership</b> (HR and General Manager) to communicate feedback, ideas and workplace concerns.","Facilitate open, safe and respectful communication channels across diverse departments.","Partner with management to track, update and drive progress of the company's <b>Employee Engagement Survey action plan</b>."],
+   proof:[{src:"assets/treehouse-listening-team.jpg",label:"Listening Team nomination"}]},
+  {meta:"Jun 2020 – Jul 2022",role:"Executive Assistant",org:"UIU Computer Club",badge:"2 yrs 2 mos",logo:"uiu.ac.bd",fallback:"UIU",
+   points:["Supported the club committee with <b>meeting coordination, record-keeping and member communications</b>.","Helped organise student events and workshops, liaising with faculty and sponsors as needed."],
+   proof:[]}
 ];
 
 /* ---- RECOGNITION / CERTIFICATIONS ----
@@ -622,10 +747,10 @@ function logoEl(domain,fallback,cls){
   return `<div class="${cls}"><img src="https://logo.clearbit.com/${domain}" alt="" loading="lazy" onerror="this.outerHTML='<span class=&quot;fallback&quot;>${fallback}</span>'"></div>`;
 }
 
-/* Experience list */
-const xpList=document.getElementById("xpList");
-xpList.innerHTML=EXPERIENCE.map((x,i)=>`
-  <div class="xp reveal ${i<5?"d"+i:""}" id="xp${i}">
+/* Experience + Volunteering share one card renderer */
+function renderRoles(list,idPrefix){
+  return list.map((x,i)=>`
+  <div class="xp reveal ${i<5?"d"+i:""}" id="${idPrefix}${i}">
     <div class="xp-head" data-xp="${i}">
       ${logoEl(x.logo,x.fallback,"xp-logo")}
       <div class="xp-title">
@@ -636,13 +761,40 @@ xpList.innerHTML=EXPERIENCE.map((x,i)=>`
       <div class="xp-toggle">+</div>
     </div>
     <div class="xp-body"><div class="xp-body-inner">
-      <ul class="xp-points">${x.points.map(p=>`<li>${p}</li>`).join("")}</ul>
+      ${x.stats&&x.stats.length?`<div class="xp-stats">${x.stats.map(s=>`<div class="xp-stat"><div class="xs-n" data-count="${s.v}" data-pre="${s.pre||""}" data-suf="${s.suf||""}">0</div><div class="xs-l">${s.lbl}</div></div>`).join("")}</div>`:""}
+      <ul class="xp-points">${x.points.map((p,pi)=>`<li style="--pi:${pi}">${p}</li>`).join("")}</ul>
       ${x.proof.length?`<div class="xp-proof"><div class="xp-proof-label">Proof · tap to enlarge</div>${x.proof.map(p=>`<div class="thumb" data-img="${p.src}" data-cap="${p.label}" title="${p.label}"><img src="${p.src}" alt="${p.label}" loading="lazy" onerror="this.closest('.thumb').style.display='none'"></div>`).join("")}</div>`:""}
     </div></div>
   </div>`).join("");
+}
+const xpList=document.getElementById("xpList");
+if(xpList)xpList.innerHTML=renderRoles(EXPERIENCE,"xp");
+const volList=document.getElementById("volList");
+if(volList)volList.innerHTML=renderRoles(VOLUNTEERING,"vxp");
 document.querySelectorAll(".xp-head").forEach(h=>{
-  h.addEventListener("click",()=>h.closest(".xp").classList.toggle("open"));
+  h.addEventListener("click",()=>{
+    const card=h.closest(".xp");
+    const opening=!card.classList.contains("open");
+    card.classList.toggle("open");
+    if(opening)countUp(card);
+  });
 });
+/* Animate numbers from 0 to their value when a card opens */
+function countUp(scope){
+  scope.querySelectorAll(".xs-n").forEach(el=>{
+    if(el.dataset.done)return;
+    const pre=el.dataset.pre||"", suf=el.dataset.suf||"", target=+el.dataset.count;
+    if(pre){el.textContent=pre+suf;el.dataset.done="1";return;}
+    const dur=900, t0=performance.now();
+    function step(t){
+      const p=Math.min((t-t0)/dur,1);
+      const eased=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*eased)+suf;
+      if(p<1)requestAnimationFrame(step); else el.dataset.done="1";
+    }
+    requestAnimationFrame(step);
+  });
+}
 
 /* Recognition grid */
 const awardGrid=document.getElementById("awardGrid");
@@ -664,6 +816,40 @@ document.querySelectorAll(".overlay").forEach(ov=>{
   ov.addEventListener("click",e=>{if(e.target===ov||e.target.hasAttribute("data-close"))closeOverlay(ov);});
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".overlay.show").forEach(closeOverlay);});
+
+/* Contact popups: email + phone, each with a Copy button */
+const CONTACTS={
+  email:{eyebrow:"Email",title:"Email me",value:"mdrahmathullahmehedi@gmail.com",action:"mailto:mdrahmathullahmehedi@gmail.com",actionLabel:"Open mail app"},
+  phone:{eyebrow:"Phone",title:"Call me",value:"+44 7803 519013",action:"tel:+447803519013",actionLabel:"Call now",extra:{href:"https://wa.me/447803519013",label:"WhatsApp instead"}}
+};
+const copyIcon='<svg viewBox="0 0 24 24"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>';
+const tickIcon='<svg viewBox="0 0 24 24"><path d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
+document.querySelectorAll("[data-contact]").forEach(el=>{
+  el.addEventListener("click",e=>{
+    e.preventDefault();
+    const c=CONTACTS[el.dataset.contact];if(!c)return;
+    modalContent.innerHTML=`
+      <div class="m-eyebrow">${c.eyebrow}</div>
+      <h3>${c.title}</h3>
+      <div class="copy-row">
+        <span class="cval">${c.value}</span>
+        <button class="copy-btn" id="copyContact">${copyIcon}Copy</button>
+      </div>
+      <div class="copy-actions">
+        <a class="view-btn" href="${c.action}">${c.actionLabel} →</a>
+        ${c.extra?`<a class="view-btn" href="${c.extra.href}" target="_blank" rel="noopener" style="background:#25D366">${c.extra.label} →</a>`:""}
+      </div>`;
+    document.getElementById("copyContact").addEventListener("click",()=>{
+      const btn=document.getElementById("copyContact");
+      const raw=el.dataset.contact==="phone"?c.value.replace(/\s/g,""):c.value;
+      if(navigator.clipboard){navigator.clipboard.writeText(raw).then(()=>{
+        btn.classList.add("done");btn.innerHTML=tickIcon+"Copied";
+        setTimeout(()=>{btn.classList.remove("done");btn.innerHTML=copyIcon+"Copy";},2200);
+      }).catch(()=>{});}
+    });
+    openOverlay(modalOverlay);
+  });
+});
 
 /* Award popups */
 awardGrid.addEventListener("click",e=>{
@@ -805,61 +991,6 @@ document.getElementById("openPortfolio").addEventListener("click",()=>{
   openOverlay(modalOverlay);
 });
 
-/* =========================================================
-   SKILLS: bar animation + live demo chart
-   ========================================================= */
-function animateBars(scope){
-  (scope||document).querySelectorAll(".bar-fill").forEach(b=>{
-    b.style.width="0";
-    setTimeout(()=>{b.style.width=b.dataset.w+"%";},150);
-  });
-}
-const DEMO=[
-  {label:"Occupancy %",cats:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],vals:[62,68,74,81,93,97,88],unit:"%"},
-  {label:"Revenue mix £k",cats:["Direct","OTA","Corporate","Groups","Walk-in"],vals:[42,35,28,16,7],unit:"k"},
-  {label:"Leads by source",cats:["Events","Referral","Inbound","Outbound","Partner"],vals:[34,26,21,15,9],unit:""}
-];
-let demoDS=0,demoAnim=null;
-function drawDemo(progress){
-  const cv=document.getElementById("demoChart");if(!cv)return;
-  const dpr=Math.min(window.devicePixelRatio||1,2);
-  const W=cv.clientWidth,H=cv.clientHeight||260;
-  cv.width=W*dpr;cv.height=H*dpr;
-  const ctx=cv.getContext("2d");ctx.scale(dpr,dpr);ctx.clearRect(0,0,W,H);
-  const d=DEMO[demoDS],n=d.vals.length,max=Math.max(...d.vals)*1.15;
-  const padL=14,padB=30,padT=12,bw=Math.min(70,(W-padL*2)/n*0.55),gap=(W-padL*2)/n;
-  ctx.strokeStyle="rgba(26,34,51,.08)";ctx.lineWidth=1;
-  for(let g=1;g<=3;g++){const y=padT+(H-padB-padT)*(1-g/3.5);ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(W-padL,y);ctx.stroke();}
-  d.vals.forEach((v,i)=>{
-    const h=(H-padB-padT)*(v/max)*progress;
-    const x=padL+gap*i+(gap-bw)/2,y=H-padB-h;
-    const grad=ctx.createLinearGradient(0,y,0,H-padB);
-    grad.addColorStop(0,i%2?"#D2A858":"#3E5C84");grad.addColorStop(1,i%2?"#B07C2E":"#1E3A5F");
-    ctx.fillStyle=grad;
-    ctx.beginPath();ctx.roundRect(x,y,bw,h,[7,7,0,0]);ctx.fill();
-    ctx.fillStyle="#1A2233";ctx.font="600 12px Inter";ctx.textAlign="center";
-    if(progress>0.95)ctx.fillText(v+(d.unit==="%"?"%":""),x+bw/2,y-8);
-    ctx.fillStyle="#67708A";ctx.font="11px 'JetBrains Mono'";
-    ctx.fillText(d.cats[i],x+bw/2,H-10);
-  });
-}
-function runDemo(){
-  if(demoAnim)cancelAnimationFrame(demoAnim);
-  const t0=performance.now();
-  function step(t){
-    const p=Math.min((t-t0)/800,1);
-    drawDemo(1-Math.pow(1-p,3));
-    if(p<1)demoAnim=requestAnimationFrame(step);
-  }
-  demoAnim=requestAnimationFrame(step);
-}
-document.querySelectorAll(".demo-tab").forEach(b=>{
-  b.addEventListener("click",()=>{
-    document.querySelectorAll(".demo-tab").forEach(x=>x.classList.remove("active"));
-    b.classList.add("active");demoDS=+b.dataset.ds;runDemo();
-  });
-});
-window.addEventListener("resize",()=>{if(document.getElementById("page-skills").classList.contains("active"))drawDemo(1);});
 
 /* =========================================================
    WEBGL BACKGROUND: navy knot, faded per tab so text always wins
@@ -919,8 +1050,8 @@ window.addEventListener("resize",()=>{if(document.getElementById("page-skills").
    ========================================================= */
 (function(){
   const el=document.getElementById("summary");if(!el)return;
-  const text="I turn operational complexity into systems that work, across hospitality, data and care.";
-  const accent=["systems","that","work,"];
+  const text="I turn business questions into data-driven decisions, across sales, consulting and operations.";
+  const accent=["data-driven","decisions,"];
   text.split(" ").forEach((w,i)=>{
     const span=document.createElement("span");
     span.className="w"+(accent.includes(w)?" accent":"");
@@ -943,6 +1074,7 @@ const KNOT_STATES={
   home:    {x:26,y:5,s:1,o:0.85},
   about:   {x:-36,y:14,s:0.5,o:0.28},
   work:    {x:34,y:12,s:0.45,o:0.25},
+  volunteer:{x:-34,y:12,s:0.45,o:0.25},
   projects:{x:-34,y:12,s:0.45,o:0.25},
   skills:  {x:34,y:12,s:0.45,o:0.25},
   awards:  {x:-34,y:12,s:0.45,o:0.25},
@@ -963,7 +1095,6 @@ function showTab(tab){
   setTimeout(()=>{
     targetPage.querySelectorAll(".reveal").forEach(r=>{const rect=r.getBoundingClientRect();if(rect.top<window.innerHeight*0.92)r.classList.add("in");});
     initObservers(targetPage);bindTilt();
-    if(tab==="skills"){animateBars(targetPage);runDemo();}
   },90);
   if(window.knotState){
     const st={...(KNOT_STATES[tab]||KNOT_STATES.home)};
@@ -1003,7 +1134,7 @@ bindTilt();
 
 /* INIT */
 const initial=(location.hash||"#home").replace("#","");
-showTab(["home","about","work","projects","skills","awards","contact"].includes(initial)?initial:"home");
+showTab(["home","about","work","volunteer","projects","skills","awards","contact"].includes(initial)?initial:"home");
 </script>
 </body>
 </html>
